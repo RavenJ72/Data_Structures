@@ -1,0 +1,155 @@
+package CustomBinarySearchTree;
+
+import CustomBinarySearchTree.AbstractBinarySearchTree;
+
+import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class BinarySearchTree<E extends Comparable<E>> implements AbstractBinarySearchTree<E> {
+
+
+    private Node<E> root;
+
+    private BinarySearchTree(Node<E> root) {
+        this.root = root;
+    }
+
+    public BinarySearchTree() {
+        this.root = null;
+    }
+
+    @Override
+    public void insert(E element) {
+        root = insertRec(root, element);
+    }
+
+    private Node<E> insertRec(Node<E> root, E element) {
+        if (root == null) {
+            root = new Node<>(element);
+            return root;
+        }
+        if (element.compareTo(root.value) < 0) {
+            root.leftChild = insertRec(root.leftChild, element);
+        } else if (element.compareTo(root.value) > 0) {
+            root.rightChild = insertRec(root.rightChild, element);
+        }
+        return root;
+    }
+
+    @Override
+    public boolean contains(E element) {
+        return containsRec(root, element);
+    }
+
+    private boolean containsRec(Node<E> root, E element) {
+        if (root == null) {
+            return false;
+        }
+        if (element.equals(root.value)) {
+            return true;
+        }
+        if (element.compareTo(root.value) < 0) {
+            return containsRec(root.leftChild, element);
+        }
+        return containsRec(root.rightChild, element);
+    }
+
+    @Override
+    public AbstractBinarySearchTree<E> search(E element) {
+        return searchRec(root, element);
+    }
+
+    private AbstractBinarySearchTree<E> searchRec(Node<E> root, E element) {
+        if (root == null || element.equals(root.value)) {
+            return new BinarySearchTree<>(root);
+        }
+        if (element.compareTo(root.value) < 0) {
+            return searchRec(root.leftChild, element);
+        }
+        return searchRec(root.rightChild, element);
+    }
+
+    @Override
+    public Node<E> getRoot() {
+        return root;
+    }
+
+    @Override
+    public Node<E> getLeft() {
+        if (root != null) {
+            return root.leftChild;
+        }
+        return null;
+    }
+
+    @Override
+    public Node<E> getRight() {
+        if (root != null) {
+            return root.rightChild;
+        }
+        return null;
+    }
+
+    @Override
+    public E getValue() {
+        if (root != null) {
+            return root.value;
+        }
+        return null;
+    }
+
+    public String asTree() {
+
+        int height = getHeight(root);
+
+
+        int width = (int) Math.pow(2, height + 1) - 1;
+
+
+        String[][] matrix = new String[height][width];
+
+
+        for (String[] row : matrix) {
+            Arrays.fill(row, " ");
+        }
+
+
+        fillMatrix(root, matrix, 0, 0, width / 2);
+
+
+        StringBuilder result = new StringBuilder();
+        for (String[] row : matrix) {
+            for (String cell : row) {
+                result.append(cell);
+            }
+            result.append("\n");
+        }
+
+        return result.toString();
+    }
+    private void fillMatrix(Node<E> node, String[][] matrix, int row, int left, int right) {
+        if (node == null) {
+            return;
+        }
+
+        int mid = (left + right) / 2;
+
+        matrix[row][mid] = node.value.toString();
+
+        fillMatrix(node.leftChild, matrix, row + 1, left, mid - 1);
+        fillMatrix(node.rightChild, matrix, row + 1, mid + 1, right);
+    }
+    private int getHeight(Node<E> node) {
+        if (node == null) {
+            return 0;
+        }
+        int leftHeight = getHeight(node.leftChild);
+        int rightHeight = getHeight(node.rightChild);
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+
+
+
+
+}

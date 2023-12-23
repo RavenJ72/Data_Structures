@@ -188,17 +188,4 @@ public class BinaryTree<E> implements AbstractBinaryTree<E> {
         int rightHeight = getHeight(node.getRight());
         return Math.max(leftHeight, rightHeight) + 1;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

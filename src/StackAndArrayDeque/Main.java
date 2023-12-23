@@ -1,4 +1,6 @@
-package Stack;
+package StackAndArrayDeque;
+
+import Entitys.Minion;
 
 import java.util.*;
 import java.util.List;
@@ -16,11 +18,6 @@ public class Main {
         minionStack.push(new Minion("b", "Yellow", 25));
         minionStack.push(new Minion("a", "bbbb", 25));
 
-
-
-
-
-
         List<Minion> listForSort = new ArrayList<>();
 
         // Итерация по стеку минионов и вывод информации о них
@@ -30,16 +27,12 @@ public class Main {
             System.out.println("Имя: " + minion.getName() + ", Цвет: " + minion.getBodyColor() + ", Возраст: " + minion.getAge());
         }
 
-
         Collections.sort(listForSort);
 
         listForSort.stream().forEach(System.out::println);
 
-
         Minion minion1 = new Minion("Dave", "Yellow", 20);
         Minion minion2 = new Minion("Kevin", "Yellow", 25);
-
-
 
         int result = minion1.compareTo(minion2);
 
@@ -50,14 +43,6 @@ public class Main {
         } else {
             System.out.println(minion1.getName() + " равен " + minion2.getName());
         }
-
-
-
-
-
-
-
-
 
     }
 }

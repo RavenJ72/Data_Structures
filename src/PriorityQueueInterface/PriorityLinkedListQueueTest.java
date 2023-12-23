@@ -13,7 +13,5 @@ public class PriorityLinkedListQueueTest {
         }
         System.out.println(System.currentTimeMillis()-currentTime + "мс");
 
-
-
     }
 }

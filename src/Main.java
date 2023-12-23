@@ -20,18 +20,7 @@ public class Main {
                 )
         );
 
-//        System.out.println(tree.asMatrixTree());
-//
-//        tree.inOrder().stream().forEach(e-> System.out.print(e.getKey() + " "));
-//        System.out.println();
-//        tree.preOrder().stream().forEach(e-> System.out.print(e.getKey() + " "));
-//        System.out.println();
-//        tree.postOrder().stream().forEach(e-> System.out.print(e.getKey() + " "));
-//        System.out.println();
-//        tree.breadthFirst().stream().forEach(e-> System.out.print(e.getKey() + " "));
-
-
-
+        System.out.println(tree.asMatrixTree());
 
         BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<>();
         binarySearchTree.insert(10);
@@ -41,15 +30,11 @@ public class Main {
         binarySearchTree.insert(3);
         binarySearchTree.insert(4);
 
-
-
-
         // Выводим структуру дерева
         System.out.println("Структура дерева:");
         System.out.println(binarySearchTree.asTree());
 
-        System.out.println(new MaxPathSum().maxPathSum(binarySearchTree.getRoot()));
-
+        System.out.println("Максимальнная сумма пути в дереве: " + new MaxPathSum().maxPathSum(binarySearchTree.getRoot()));
 
     }
 }

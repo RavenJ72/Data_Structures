@@ -1,8 +1,6 @@
-package Stack;
+package Entitys;
 
-import java.util.Comparator;
-
-public class Minion implements Comparable<Minion>{
+public class Minion implements Comparable<Minion> {
     private String name;
     private String bodyColor;
     private int age;
@@ -44,20 +42,11 @@ public class Minion implements Comparable<Minion>{
         }
 
         int bodyColorComparison = other.bodyColor.compareTo(this.bodyColor);
-                //this.bodyColor.compareTo(other.bodyColor);
+        //this.bodyColor.compareTo(other.bodyColor);
         if (bodyColorComparison != 0) {
             return bodyColorComparison;
         }
 
-
-        return Integer.compare( this.age,other.age);
+        return Integer.compare(this.age, other.age);
     }
-
-
-
-
-
-
-
-
 }

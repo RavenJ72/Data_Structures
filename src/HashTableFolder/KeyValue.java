@@ -29,11 +29,6 @@ public class KeyValue<Key, Value> {
     }
 
     @Override
-    public int hashCode() {
-        return this.combineHashCodes(this.getKey().hashCode(), this.getValue().hashCode());
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -47,7 +42,5 @@ public class KeyValue<Key, Value> {
         return String.format("%s -> %s", this.getKey(), this.getValue());
     }
 
-    private int combineHashCodes(int h1, int h2) {
-        return ((h1 <<5) + h1) ^ h2;
-    }
+
 }

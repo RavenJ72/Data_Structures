@@ -9,6 +9,7 @@ public class HashTable<K, V> implements Iterable<KeyValue<K, V>> {
     private static final int INITIAL_CAPACITY = 16;
     public static final double LOAD_FACTOR = 0.80d;
     private LinkedList<KeyValue<K, V>>[] slots;
+
     private int count;
     private int capacity;
 
@@ -29,16 +30,17 @@ public class HashTable<K, V> implements Iterable<KeyValue<K, V>> {
         this.count = 0;
     }
 
-    // Метод для добавления элемента
-    // Метод для добавления элемента
+
     public void add(K key, V value) {
         this.growIfNeeded();
         int slotNumber = this.findSlotNumber(key);
         LinkedList<KeyValue<K, V>> slot = this.slots[slotNumber];
 
-        // Проверяем, существует ли уже элемент с таким же ключом в слоте
+
         for (KeyValue<K, V> keyValue : slot) {
+
             if (keyValue.getKey().equals(key)) {
+
                 keyValue.setValue(value);
                 return;
             }

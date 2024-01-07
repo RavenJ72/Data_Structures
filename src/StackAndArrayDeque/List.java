@@ -1,9 +1,10 @@
 package StackAndArrayDeque;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class List<T> implements Iterable<T>{
+public class List<T> implements Iterable<T> {
     private Node start;
     private Node end;
     private int size;
@@ -91,6 +92,13 @@ public class List<T> implements Iterable<T>{
         size++;
         return data;
     }
+
+    public void addAll(List<T> elements){
+        for(T data : elements){
+            this.addLast(data);
+        }
+    }
+
     public T peekFirst() {
         if (isEmpty()) {
             return null;
@@ -189,4 +197,59 @@ public class List<T> implements Iterable<T>{
     public Iterator<T> iterator() {
         return new ListIterator();
     }
+
+
+
+
+    public void sort(Comparator<T> comparator) {
+        if (size > 1) {
+            start = mergeSort(start, comparator);
+        }
+    }
+
+    private Node<T> mergeSort(Node<T> head, Comparator<T> comparator) {
+        if (head == null || head.getNextNode() == null) {
+            return head;
+        }
+
+        Node<T> middle = getMiddle(head);
+        Node<T> nextOfMiddle = middle.getNextNode();
+
+        middle.setNextNode(null);
+
+        Node<T> left = mergeSort(head, comparator);
+        Node<T> right = mergeSort(nextOfMiddle, comparator);
+
+        return sortedMerge(left, right, comparator);
+    }
+
+    private Node<T> sortedMerge(Node<T> a, Node<T> b, Comparator<T> comparator) {
+        Node<T> result;
+        if (a == null) return b;
+        if (b == null) return a;
+
+        if (comparator.compare(a.getData(), b.getData()) <= 0) {
+            result = a;
+            result.setNextNode(sortedMerge(a.getNextNode(), b, comparator));
+        } else {
+            result = b;
+            result.setNextNode(sortedMerge(a, b.getNextNode(), comparator));
+        }
+        return result;
+    }
+
+    private Node<T> getMiddle(Node<T> head) {
+        if (head == null) {
+            return head;
+        }
+        Node<T> slow = head, fast = head;
+
+        while (fast.getNextNode() != null && fast.getNextNode().getNextNode() != null) {
+            slow = slow.getNextNode();
+            fast = fast.getNextNode().getNextNode();
+        }
+        return slow;
+    }
+
+
 }

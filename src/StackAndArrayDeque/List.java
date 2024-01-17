@@ -22,15 +22,22 @@ public class List<T> implements Iterable<T> {
             while (currentNode != null) {
                 if (currentNode.getData().equals(data)) {
                     if (currentNode.getPrevNode() != null && currentNode.getNextNode() != null) {
+                        // Узел в середине списка
                         currentNode.getPrevNode().setNextNode(currentNode.getNextNode());
                         currentNode.getNextNode().setPrevNode(currentNode.getPrevNode());
                     } else if (currentNode.getPrevNode() == null) {
-                        currentNode.getNextNode().setPrevNode(null);
+                        // Удаляем первый узел
+                        start = currentNode.getNextNode();
+                        if (start != null) {
+                            start.setPrevNode(null);
+                        }
                     } else if (currentNode.getNextNode() == null) {
-                        currentNode.getPrevNode().setNextNode(null);
+                        // Удаляем последний узел
+                        end = currentNode.getPrevNode();
+                        if (end != null) {
+                            end.setNextNode(null);
+                        }
                     }
-                    currentNode.setPrevNode(null);
-                    currentNode.setNextNode(null);
                     size--;
                     return true;
                 }

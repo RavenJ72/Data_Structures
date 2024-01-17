@@ -23,10 +23,21 @@ public class NavigatorImpl implements Navigator {
         for (Route routeInMemory : routes.getValues()) {
             if (routeInMemory.equals(route)) {
                 flag = false;
+                System.err.println("Данный маршрут уже существует!");
                 break;
+
             }
         }
-        if (flag) routes.add(route.getId(), route);
+        if (flag){
+            if(route.getPoints().length() > 1){
+                routes.add(route.getId(), route);
+            }else{
+                System.err.println("Некоректный маршрут!");
+            }
+        }
+
+
+
     }
 
     @Override
